@@ -19,7 +19,7 @@ The goal of the competition is to predict whether or not a DonorsChoose.org proj
 
 
 
-## About the DonorsChoose Data Set
+### About the DonorsChoose Data Set
 
 The `train.csv` data set provided by DonorsChoose contains the following features:
 
@@ -41,7 +41,7 @@ Feature | Description
 **`teacher_prefix`** | Teacher's title. One of the following enumerated values: <br/><ul><li><code>nan</code></li><li><code>Dr.</code></li><li><code>Mr.</code></li><li><code>Mrs.</code></li><li><code>Ms.</code></li><li><code>Teacher.</code></li></ul>  
 **`teacher_number_of_previously_posted_projects`** | Number of project applications previously submitted by the same teacher. **Example:** `2` 
 
-<sup>*</sup> See the section <b>Notes on the Essay Data</b> for more details about these features.
+
 
 Additionally, the `resources.csv` data set provides more data about the resources required for each project. Each line in this file represents a resource required by a project:
 
@@ -60,22 +60,51 @@ Label | Description
 ----------|---------------
 `project_is_approved` | A binary flag indicating whether DonorsChoose approved the project. A value of `0` indicates the project was not approved, and a value of `1` indicates the project was approved.
   
+ 
+    
+    
+  
+## EDA
+
+We looked at the distributions of the data and the value counts for the various categorical variables. Below are a few highlights.
+
+<p>
+    <img src="state wise project acceptance.PNG" width="880" height="360" />
+  
+</p>
+  <br>
+<p>
+    
+   <img src="Grade wise project acceptance.PNG" width="880" height="360" />
+</p>
+  
+
+## Data Preprocessing and Feature Engineering
+  
+* We Cleaned(removing puctuation marks and stopwords) the Textual columns like Project title, Essay, Summary etc.
+* Organized the categorical features
+* Created following New features:
+  
+  * Sentiment scores of each of the Essay 
+  * Number of words in the Title 
+  * Price 
+  * Quantity 
   
   
-### Notes on the Essay Data
+## Model Building
+  
+First, I transformed the categorical variables into dummy variables. I also split the data into train and tests sets with a test size of 30%.
 
-<ul>
-Prior to May 17, 2016, the prompts for the essays were as follows:
-<li>__project_essay_1:__ "Introduce us to your classroom"</li>
-<li>__project_essay_2:__ "Tell us more about your students"</li>
-<li>__project_essay_3:__ "Describe how your students will use the materials you're requesting"</li>
-<li>__project_essay_3:__ "Close by sharing why your project will make a difference"</li>
-</ul>
+I tried three different models and evaluated them using AUC score. 
 
-
-<ul>
-Starting on May 17, 2016, the number of essays was reduced from 4 to 2, and the prompts for the first 2 essays were changed to the following:<br>
-<li>__project_essay_1:__ "Describe your students: What makes your students special? Specific details about their background, your neighborhood, and your school are all helpful."</li>
-<li>__project_essay_2:__ "About your project: How will these materials make a difference in your students' learning and improve their school lives?"</li>
-<br>For all projects with project_submitted_datetime of 2016-05-17 and later, the values of project_essay_3 and project_essay_4 will be NaN.
-</ul>
+I tried two different models(Naive Bayes and Decision Tree) along with various vectorization techniques like BOW, TFIDF, Avg. W2V, TFIDF-W2v and below is the Performace Summary of these models
+  
+  <p>
+    <img src="Decision Tree Results Summary.PNG" width="280" height="360" />
+  
+</p>
+  <br>
+  <p>
+    <img src="Naive bayes Resuls Summary.PNG" width="280" height="360" />
+  
+</p>
