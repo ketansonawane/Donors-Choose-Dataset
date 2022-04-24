@@ -100,11 +100,11 @@ I tried three different models and evaluated them using AUC score.
 I tried two different models(Naive Bayes and Decision Tree) along with various vectorization techniques like BOW, TFIDF, Avg. W2V, TFIDF-W2v and below is the Performace Summary of these models
   
   <p>
-    <img src="Decision Tree Results Summary.PNG" width="280" height="360" />
+    <img src="DT results on mutiple vectorization technique.PNG" width="540" height="240" />
   
 </p>
   <br>
   <p>
-    <img src="Naive bayes Resuls Summary.PNG" width="280" height="360" />
+    <img src="NB results on multiple vectorization technique.PNG" width="540" height="240" />
   
 </p>
